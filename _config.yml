@@ -1,11 +1,11 @@
 # Basic
-title: Vno Jekyll
-subtitle: A blog-orientation theme for Jekyll
+title: Herbert Gao
+subtitle: Never be satisfied
 welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
-description: Vno Jekyll is a port of my Ghost theme vno.
-creator: <a href="http://onev.cat">@onevcat</a>
+description: Hi there, I'm herbert gao, a Java developer from China. Live in Chengdu, work in IBM.
+creator: <a href="https://herbertgaoo.github.io/">@idaidai</a>
 
-url: "http://vno.onevcat.com"
+url: "https://herbertgaoo.github.io"
 
 permalink: /:year/:month/:title/
 
@@ -38,11 +38,11 @@ comment:
     
 # Social
 social:
-    weibo: onevcat
-    github: onevcat
-    twitter: onevcat
-    gplus: 107108267983477358170
-    mail: onev@onevcat.com
+    weibo: idaidaiSF
+    github: herbertgaoo
+    twitter: herbert_gaoo
+    gplus: 117638806750668657968
+    mail: idaidai@outlook.com
 
 # Google Analytics
 ga:
