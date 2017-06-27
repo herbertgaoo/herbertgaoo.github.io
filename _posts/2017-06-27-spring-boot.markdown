@@ -7,7 +7,7 @@ tag: Spring Boot
 
  讲真，到现在为止我都没有系统的学习过Java常用的几大框架（struts、spring、hibernate和mybaits），这几种框架都是通过项目一点点积累、熟悉。最近项目上用到Srping Boot，感觉相对于之前用过的几种框架来说，确实轻便不少，可以快速的进入开发状态，Srping Boot的配置基本上都在`application.properties`文件中，由于对一些配置不是很熟悉，经常需要百度，所以找到一个较完整的Spring Boot配置记录一下，方便以后查看。
 
-{% highlight ruby %}
+{% highlight %}
  # ===================================================================
  # COMMON SPRING BOOT PROPERTIES
  #
