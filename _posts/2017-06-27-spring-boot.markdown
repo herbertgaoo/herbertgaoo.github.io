@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Sping Boot 通用配置项目
+title: Spring Boot 通用配置项目
 date: 2017-06-27 10:50:24.000000000 +09:00
 tag: Spring Boot
 ---
