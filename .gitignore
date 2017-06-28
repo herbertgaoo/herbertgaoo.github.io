@@ -37,3 +37,5 @@ build.sh
 
 #idea
 .idea/
+_site/
+.sass-cache/
