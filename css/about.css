@@ -265,6 +265,9 @@ ul.media_sec li img{
     vertical-align: middle;
     margin-right: 5px;
 }
+.language_ver{
+    margin-left: 15px;
+}
 /*--responsive--*/
 @media (max-width: 1024px){
 .top-header {
@@ -553,3 +556,4 @@ ul.media_sec li:nth-child(3){
   margin-top: 1.5em;
 }
 }
+
