@@ -1,7 +1,7 @@
 # Basic
 title: Herbert Gao
 subtitle: Never be satisfied
-welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
+welcome_message: <a>Welcome to onboard</a>
 description: Hi there, I'm herbert gao, a Java developer from China. Live in Chengdu, work in IBM.
 creator: <a href="https://herbertgaoo.github.io/">@idaidai</a>
 
@@ -13,7 +13,7 @@ permalink: /:year/:month/:title/
 highlighter: rouge
 
 # supported colors: blue, green, purple, red, orange or slate. If you need clear, leave it empty.
-cover_color: red
+#cover_color: black
 
 # The blog button should not be removed.
 blog_button:

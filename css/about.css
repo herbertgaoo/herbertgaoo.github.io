@@ -92,7 +92,7 @@ a:focus {
 .work,.education {
   border-left: 11px solid #11DADA;
 }
-.work {
+.work,.education {
 	margin-bottom:2.5em;
 }
 .details{
@@ -108,7 +108,7 @@ a:focus {
   border-bottom: 4px solid #000; 
 }
 .posts,.college{
-  margin-right: 3em;
+  margin-right: 1.2em;
 }
 .posts h4,.college h4{
 	color:#333;
@@ -127,7 +127,7 @@ a:focus {
 	font-weight: 400;
 }
 .city{ 
-	width:19%;
+	width:23%;
 }
 .city h5{
 	color:#333;
