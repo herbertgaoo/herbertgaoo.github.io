@@ -217,6 +217,7 @@ a:focus {
 .right_grid{
 	float:left;
 	width:50%;
+    padding-left: 15px;
 }
 ul.list2{
 	 border-left: 11px solid #11DADA;
