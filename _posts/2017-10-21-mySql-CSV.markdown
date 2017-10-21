@@ -13,16 +13,16 @@ tag: Mysql CSV 逗号分隔
 ### 问题描述
 问题简单描述为库中有两张表a、b, a表如下：
 
-![a表](/assets/images/2017/2017-10-21-01.png)
+![a表](https://github.com/herbertgaoo/herbertgaoo.github.io/blob/master/assets/2017/2017-10-21-01.png?raw=true)
 
 b表如下：
 
-![b表](/assets/images/2017/2017-10-21-02.png)
+![b表](https://github.com/herbertgaoo/herbertgaoo.github.io/blob/master/assets/2017/2017-10-21-02.png?raw=true)
 
 需要查询b表中`industry_id`字段所包含的所有a表`id`字段的记录。
-# 期望结果：
+##### 期望结果：
 
-![结果](/assets/images/2017/2017-10-21-03.png)
+![结果](https://github.com/herbertgaoo/herbertgaoo.github.io/blob/master/assets/2017/2017-10-21-03.png?raw=true)
 
 ### solution one（FIND_IN_SET()函数）
 
@@ -50,7 +50,7 @@ FROM b
 JOIN mysql.help_topic t_index
 ON t_index.help_topic_id < (length(b.industry_id) - length(replace(b.industry_id,',',''))+1)
 ```
-## 原理分析：
+##### 原理分析：
 这个join最基本原理是笛卡尔积。通过这个方式来实现循环。
 以下是具体问题分析：
 length(b.industry_id) - length(replace(b.industry_id,',',''))+1  表示了，按照逗号分割后，改列拥有的数值数量，下面简称n
@@ -58,12 +58,12 @@ JOIN过程的伪代码：
 ```
 根据ID进行循环
 {
-	判断：i 是否 <= n
-	{
-		获取最靠近第 i 个逗号之前的数据， 即 substring_index(substring_index(b.industry_id,',',t_index.ID),',',-1)
-		i = i +1 
-	}
-	ID = ID +1 
+   判断：i 是否 <= n
+   {
+     获取最靠近第 i 个逗号之前的数据， 即 substring_index(substring_index(b.industry_id,',',t_index.ID),',',-1)
+     i = i +1 
+   }
+   ID = ID +1 
 }
 ```
 
