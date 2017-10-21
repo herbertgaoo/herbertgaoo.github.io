@@ -24,7 +24,7 @@ b表如下：
 
 ![结果](/assets/images/2017/2017-10-21-03.png)
 
-### solution one（FIND_IN_SET()函数）
+### 方法一（FIND_IN_SET()函数）
 
 MySQL手册中find_in_set函数的语法
 ```
@@ -41,7 +41,7 @@ FROM a
 JOIN b ON FIND_IN_SET(a.id,b.industry_id)
 ```
 
-### solution two（行列转换处理）
+### 方法二（行列转换处理）
 先来看具体SQL（基于问题描述中的a、b表）：
 
 ``` 
