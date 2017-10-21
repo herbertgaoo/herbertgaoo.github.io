@@ -13,16 +13,16 @@ tag: Mysql CSV 逗号分隔
 ### 问题描述
 问题简单描述为库中有两张表a、b, a表如下：
 
-![a表](https://github.com/herbertgaoo/herbertgaoo.github.io/blob/master/assets/2017/2017-10-21-01.png?raw=true)
+![a表](/assets/images/2017/2017-10-21-01.png)
 
 b表如下：
 
-![b表](https://github.com/herbertgaoo/herbertgaoo.github.io/blob/master/assets/2017/2017-10-21-02.png?raw=true)
+![b表](/assets/images/2017/2017-10-21-02.png)
 
 需要查询b表中`industry_id`字段所包含的所有a表`id`字段的记录。
 ##### 期望结果：
 
-![结果](https://github.com/herbertgaoo/herbertgaoo.github.io/blob/master/assets/2017/2017-10-21-03.png?raw=true)
+![结果](/assets/images/2017/2017-10-21-03.png)
 
 ### solution one（FIND_IN_SET()函数）
 
