@@ -1,7 +1,7 @@
 ---
 layout: post
 title: jQuery QRCode extend
-date: 2018-3-21 09:09:24.000000000 +09:00
+date: 2018-3-21 09:56:24.000000000 +09:00
 tag: jQuery js
 ---
 
@@ -12,7 +12,8 @@ tag: jQuery js
     * border 边框（也就是留白）默认值为5px 
     * imgSrc logo图片地址 默认值为空 “” 
     * imgWidth logo图片宽度 默认值为0，如果没有imgSrc则失效 
-    * imgHeight logo图片高度 默认值为0，如果不写则默认与imgWidth值相同 
+    * imgHeight logo图片高度 默认值为0，如果不写则默认与
+    * imgWidth值相同 
 
 ## 参数说明options
 
