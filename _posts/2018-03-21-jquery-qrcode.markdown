@@ -2,15 +2,17 @@
 layout: post
 title: jQuery QRCode extend
 date: 2018-3-21 09:09:24.000000000 +09:00
+tag: jQuery js
 ---
 
 ## jquery qrcode
 
-基于jquery.qrcode.min.js的生成二维码功能，在options中扩展了以下几个属性：</br>
-    border 边框（也就是留白）默认值为5px </br>
-    imgSrc logo图片地址 默认值为空 “” </br>
-    imgWidth logo图片宽度 默认值为0，如果没有imgSrc则失效 </br>
-    imgHeight logo图片高度 默认值为0，如果不写则默认与imgWidth值相同 </br>
+基于jquery.qrcode.min.js的生成二维码功能，在options中扩展了以下几个属性：
+
+    * border 边框（也就是留白）默认值为5px 
+    * imgSrc logo图片地址 默认值为空 “” 
+    * imgWidth logo图片宽度 默认值为0，如果没有imgSrc则失效 
+    * imgHeight logo图片高度 默认值为0，如果不写则默认与imgWidth值相同 
 
 ## 参数说明options
 
