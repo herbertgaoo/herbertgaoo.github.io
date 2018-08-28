@@ -27,7 +27,7 @@ date: 2018-8-28 23:09:24.000000000 +09:00
 
 ### 下载链接
 
-    [jquery-router](https://pan.baidu.com/s/1pzmS7V4tjd2Mh6m_BatltQ)
+[jquery-router](https://pan.baidu.com/s/1pzmS7V4tjd2Mh6m_BatltQ)
 
 
 
