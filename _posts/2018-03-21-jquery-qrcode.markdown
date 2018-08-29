@@ -13,7 +13,7 @@ tag: jQuery js
     * imgSrc logo图片地址 默认值为空 “” 
     * imgWidth logo图片宽度 默认值为0，如果没有imgSrc则失效 
     * imgHeight logo图片高度 默认值为0，如果不写则默认与
-    * imgWidth值相同 
+    * imgWidth值相同
 
 ## 参数说明options
 

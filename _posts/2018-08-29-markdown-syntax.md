@@ -5,10 +5,6 @@ date: 2018-8-29 09:09:24.000000000 +09:00
 tag: jQuery js
 ---
 
-**NOTE:** This is Simplelified  Chinese Edition Document of Markdown Syntax. If you are seeking for English Edition Document. Please refer to [Markdown: Syntax][eng-doc].
-
-[eng-doc]:http://daringfireball.net/projects/markdown/syntax
-
 **声明：** 本文转自Rikud的 [GitHub][]，仅供个人参考使用。
 
   [src1]: http://gitcafe.com/riku/Markdown-Syntax-CN/blob/master/syntax.md
@@ -17,6 +13,11 @@ tag: jQuery js
   [g]: http://gitcafe.com/riku/Markdown-Syntax-CN
   [Github]: https://github.com/riku/Markdown-Syntax-CN
   [GitCafe]: http://gitcafe.com/riku/Markdown-Syntax-CN/
+
+**NOTE:** If you are seeking for English Edition Document. Please refer to [Markdown: Syntax][eng-doc].
+
+[eng-doc]:http://daringfireball.net/projects/markdown/syntax
+
 
 Markdown 语法说明 (简体中文版) / ([点击查看快速入门](./basic.html))
 ================

@@ -19,7 +19,7 @@ tag: jQuery js
     * keyboard 是否支持键盘操作
     * title 是否显示图片标题
     * Toolbar 底部工具选项
-    * i18n 中文说明 
+    * i18n 中文说明
     * callbacks 回调函数
     * modalSize 默认弹层大小(width,height)
     * modalOffset 弹层偏移量(x轴,y轴)
