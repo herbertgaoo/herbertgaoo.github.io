@@ -2,7 +2,7 @@
 layout: post
 title: 【转】markdown语法
 date: 2018-8-29 09:09:24.000000000 +09:00
-tag: jQuery js
+tag: markdown
 ---
 
 **声明：** 本文转自Rikud的 [GitHub][]，仅供个人参考使用。
