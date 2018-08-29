@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [转] markdown语法
+title: 【转】markdown语法
 date: 2018-8-29 09:09:24.000000000 +09:00
 tag: jQuery js
 ---
