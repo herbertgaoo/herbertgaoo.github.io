@@ -17,7 +17,7 @@ tag: jQuery js
 
 ## 参数说明options
 
-```
+{% highlight JavaScript %}
 {
     render   : "canvas",//设置渲染方式 还有table方式
     width       : 256,     //设置宽度
@@ -31,7 +31,7 @@ tag: jQuery js
     imgWidth: 40,   //图片宽度
     imgHeight: 40 //图片高度可以省略不写， 但是宽度imgWidth是必
 }
-```
+{% endhighlight %}
 
 ## 下载地址
 
