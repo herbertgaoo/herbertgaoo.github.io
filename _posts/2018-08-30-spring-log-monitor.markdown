@@ -25,7 +25,7 @@ tag: Spring
 
 ### example code
 
-{% highlight java %}
+{% highlight java %}
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
@@ -150,7 +150,7 @@ public class LogInterceptor implements HandlerInterceptor {
 }
 {% endhighlight %}
 
-## 读取HttpServletResponse流
+## 读取HttpServletResponse流
 >&emsp;&emsp;使用拦截器来做日志监控会遇到一个问题，如何把接口返回的数据取出来保存。如果返回的是`ModelAndView`类型，可以直接在`postHandle`方法中操作`ModelAndView`对象，但如果返回的是`@ResponseBody`,则需要通过反射读取HttpServletResponse输出至客户端流的方式取出接口所返回的数据。
 
 ![debug](/assets/images/2018/2018-08-30-01.png)
@@ -159,28 +159,28 @@ public class LogInterceptor implements HandlerInterceptor {
 
 
 ### key code
-{% highlight Java %}
-    String returnStr = "";
+{% highlight java %}
+String returnStr = "";
 
-    // 截取响应流
-    CoyoteOutputStream os = (CoyoteOutputStream) response.getOutputStream();
-    // 取到流对象对应的Class对象
-    Class<CoyoteOutputStream> c = CoyoteOutputStream.class;
-    // 取出流对象中的OutputBuffer对象，该对象记录响应到客户端的内容
-    Field fs = c.getDeclaredField("ob");
-    if (fs.getType().toString().endsWith("OutputBuffer")) {
-        fs.setAccessible(true);// 设置访问ob属性的权限
-        OutputBuffer ob = (OutputBuffer) fs.get(os);// 取出ob
-        Class<OutputBuffer> cc = OutputBuffer.class;
-        Field ff = cc.getDeclaredField("outputChunk");// 取到OutputBuffer中的输出流
-        ff.setAccessible(true);
-        if (ff.getType().toString().endsWith("ByteChunk")) {
-            ByteChunk bc = (ByteChunk) ff.get(ob);// 取到byte流
-            returnStr = new String(bc.toString().getBytes(bc.getCharset()), "UTF-8");// 最终的值
-        }
+// 截取响应流
+CoyoteOutputStream os = (CoyoteOutputStream) response.getOutputStream();
+// 取到流对象对应的Class对象
+Class<CoyoteOutputStream> c = CoyoteOutputStream.class;
+// 取出流对象中的OutputBuffer对象，该对象记录响应到客户端的内容
+Field fs = c.getDeclaredField("ob");
+if (fs.getType().toString().endsWith("OutputBuffer")) {
+    fs.setAccessible(true);// 设置访问ob属性的权限
+    OutputBuffer ob = (OutputBuffer) fs.get(os);// 取出ob
+    Class<OutputBuffer> cc = OutputBuffer.class;
+    Field ff = cc.getDeclaredField("outputChunk");// 取到OutputBuffer中的输出流
+    ff.setAccessible(true);
+    if (ff.getType().toString().endsWith("ByteChunk")) {
+        ByteChunk bc = (ByteChunk) ff.get(ob);// 取到byte流
+        returnStr = new String(bc.toString().getBytes(bc.getCharset()), "UTF-8");// 最终的值
     }
+}
 {% endhighlight %}
 
-## 附件 (完整代码)
+## 附件 (完整代码)
 
 >[LogInterceptor.java](https://pan.baidu.com/s/1-aT_eT6jNZ99W1O_Ji2XbA)
