@@ -25,8 +25,7 @@ tag: Spring
 
 ### example code
 
-{% highlight Java %}
-
+{% highlight java %}
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
@@ -147,11 +146,8 @@ public class LogInterceptor implements HandlerInterceptor {
 			logger.info(sb.toString());
 		}
 		return true;
-
 	}
-	
 }
-
 {% endhighlight %}
 
 ## 读取HttpServletResponse流
@@ -164,7 +160,6 @@ public class LogInterceptor implements HandlerInterceptor {
 
 ### key code
 {% highlight Java %}
-
     String returnStr = "";
 
     // 截取响应流
@@ -184,8 +179,6 @@ public class LogInterceptor implements HandlerInterceptor {
             returnStr = new String(bc.toString().getBytes(bc.getCharset()), "UTF-8");// 最终的值
         }
     }
-
-
 {% endhighlight %}
 
 ## 附件 (完整代码)
