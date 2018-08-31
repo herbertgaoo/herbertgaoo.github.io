@@ -13,7 +13,7 @@ tag: Spring
 >&emsp;&emsp;JAVA反射（放射）机制：“程序运行时，允许改变程序结构或变量类型，这种语言称为动态语言”。从这个观点看，Perl，Python，Ruby是动态语言，C++，Java，C#不是动态语言。但是JAVA有着一个非常突出的动态相关机制：Reflection，用在Java身上指的是我们可以于运行时加载、探知、使用编译期间完全未知的classes。换句话说，Java程序可以加载一个运行时才得知名称的class，获悉其完整构造（但不包括methods定义），并生成其对象实体、或对其fields设值、或唤起其methods。
 
 ### Java类反射中所必须的类
-&emsp;&emsp;Java的类反射所需要的类并不多，它们分别是：*Field、Constructor、Method、Class、Object*，下面我将对这些类做一个简单的说明。
+&emsp;&emsp;Java的类反射所需要的类并不多，它们分别是：`Field`、`Constructor`、`Method`、`Class`、`Object`，下面我将对这些类做一个简单的说明。
 
 >&emsp;&emsp;Field类：提供有关类或接口的属性的信息，以及对它的动态访问权限。反射的字段可能是一个类（静态）属性或实例属性，简单的理解可以把它看成一个封装反射类的属性的类。
 
