@@ -1,63 +1,129 @@
 ---
 layout: post
-title: Java Reflection 反射机制 
-date: 2018-8-31 10:30:24.000000000 +09:00
-tag: Spring
+title: MongoDB基础篇
+date: 2018-09-19 17:30:24.000000000 +09:00
+tag: MongoDB
 ---
 
-&emsp;&emsp;最近在做东西的时候再次用到Java的反射机制，突然想起自己在之前的项目上做动态方法调用的时候也用过反射，但是始终没搞明白是个什么东西，今天重新学习并整理记录下来。
+MongoDB是专为可扩展性，高性能和高可用性而设计的数据库。它可以从单服务器部署扩展到大型、复杂的多数据中心架构。利用内存计算的优势，MongoDB能够提供高性能的数据读写操作。 MongoDB的本地复制和自动故障转移功能使您的应用程序具有企业级的可靠性和操作灵活性。
 
-### 概念
->&emsp;&emsp;JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。
+### 安装
+MongoDB社区版下载地址： [https://www.mongodb.com/download-center#community](https://www.mongodb.com/download-center#community)
 
->&emsp;&emsp;JAVA反射（放射）机制：“程序运行时，允许改变程序结构或变量类型，这种语言称为动态语言”。从这个观点看，Perl，Python，Ruby是动态语言，C++，Java，C#不是动态语言。但是JAVA有着一个非常突出的动态相关机制：Reflection，用在Java身上指的是我们可以于运行时加载、探知、使用编译期间完全未知的classes。换句话说，Java程序可以加载一个运行时才得知名称的class，获悉其完整构造（但不包括methods定义），并生成其对象实体、或对其fields设值、或唤起其methods。
+>&emsp;&emsp;将刚刚下载好的压缩文件mongodb-osx-ssl-x86_64-4.0.2.tgz拷贝到任意目录，然后进行解压操作，解压完成后复制一份到/Library目录下，然后切换到我们刚才新复制的mongodb安装目录/Library/mongodb-osx-ssl-x86_64-4.0.2，由于此目录下的bin目录存放着mongodb的全部命令脚本，所以需要赋予此目录执行权限.
+```
+# tar -zxvf mongodb-osx-ssl-x86_64-4.0.2.tgz
+# cp -r mongodb-osx-ssl-x86_64-4.0.2 /Library/mongodb4.0.2
+# chmod -R 755 bin
+```
 
-### Java类反射中所必须的类
-&emsp;&emsp;Java的类反射所需要的类并不多，它们分别是：`Field`、`Constructor`、`Method`、`Class`、`Object`，下面我将对这些类做一个简单的说明。
+### 创建mongodb相关数据文件目录
+>在mongodb的安装目录下创建一个data目录统一相关文件（不同文件再创建文件夹管理）
+>#### 数据文件
+>创建db子文件夹存放mongodb数据库文件，全路径/Library/mongodb4.0.2/data/db
+>```
+># cd /home/mongodb-linux-x86_64-amazon-3.6.2
+># mkdir /data
+># cd data
+># mkdir /db
+>```
+>#### 日志文件 
+>创建db子文件夹存放mongodb的相关日志，全路径/Library/mongodb4.0.2/data/log
+>```
+># mkdir /log
+>```
+>#### 文件目录赋予写权限 
+>由于所有类型文件都存在写入操作，所以数据存放目录/Library/mongodb4.0.2/data需要执行写操作权限
+>```
+>chmod -R 777 /home/mongodb-linux-x86_64-amazon-3.6.2/data
+>```
+>&emsp;&emsp;
 
->&emsp;&emsp;Field类：提供有关类或接口的属性的信息，以及对它的动态访问权限。反射的字段可能是一个类（静态）属性或实例属性，简单的理解可以把它看成一个封装反射类的属性的类。
+### 配置
 
->&emsp;&emsp;Constructor类：提供关于类的单个构造方法的信息以及对它的访问权限。这个类和Field类不同，Field类封装了反射类的属性，而Constructor类则封装了反射类的构造方法。
+在/etc目录下创建配置文件`mongodb.conf`
 
->&emsp;&emsp;Method类：提供关于类或接口上单独某个方法的信息。所反映的方法可能是类方法或实例方法（包括抽象方法）。 这个类不难理解，它是用来封装反射类方法的一个类。
+```
+#日志文件位置
+logpath=/Library/mongodb-3.6/log/mongod.log
 
->&emsp;&emsp;Class类：类的实例表示正在运行的 Java 应用程序中的类和接口。枚举是一种类，注释是一种接口。每个数组属于被映射为 Class 对象的一个类，所有具有相同元素类型和维数的数组都共享该 Class 对象。
+# 以追加方式写入日志
+logappend=true
 
->&emsp;&emsp;Object类：每个类都使用 Object 作为超类。所有对象（包括数组）都实现这个类的方法。
+# 是否以守护进程方式运行
+fork = true
 
-### 使用
-&emsp;&emsp;简单讲一下通过反射动态调用方法。
+# 只监听本地接口。注释掉听在所有接口。
+bind_ip = 0.0.0.0
 
-{% highlight java %}
-package com.pigetest.util;
+# 默认27017
+#port = 27017
 
-import java.lang.reflect.Method;
+# 数据库文件位置
+dbpath=/Library/mongodb-3.6/data
 
-public class PrivateMethodTestHelper {
-    public static Object invoke(String clazzName,String methodName,Object...params){
-        try {
-            Class<?> clazz=Class.forName(clazzName);
-            Object obj=clazz.newInstance();
-            Method[] methods = clazz.getDeclaredMethods();
-            Method callMethod=null;
-            for(Method method:methods){
-                if(method.getName().equals(methodName)){
-                    callMethod=method;
-                    break;
-                }
-            }
-            callMethod.setAccessible(true);
-            return (Object) callMethod.invoke(obj,params);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+# 启用定期记录CPU利用率和 I/O 等待
+#cpu = true
 
-    public static void main(String[] args) {
-        int value=(Integer) PrivateMethodTestHelper.invoke("com.pigetest.util.AddNumber","addNumber",1,2);
-        System.out.println(value);
-    }
+# 是否以安全认证方式运行，默认是不认证的非安全方式
+#noauth = true
+auth = true
 
-}
-{% endhighlight %}
+# 详细记录输出
+#verbose = true
+
+# Inspect all client data for validity on receipt (useful for
+# developing drivers)用于开发驱动程序时验证客户端请求
+#objcheck = true
+
+# Enable db quota management
+# 启用数据库配额管理
+#quota = true
+# 设置oplog记录等级
+# Set oplogging level where n is
+#   0=off (default)
+#   1=W
+#   2=R
+#   3=both
+#   7=W+some reads
+#diaglog=0
+
+# Diagnostic/debugging option 动态调试项
+#nocursors = true
+
+# Ignore query hints 忽略查询提示
+#nohints = true
+# 禁用http界面，默认为localhost：28017
+#nohttpinterface = true
+
+# 关闭服务器端脚本，这将极大的限制功能
+# Turns off server-side scripting.  This will result in greatly limited
+# functionality
+#noscripting = true
+# 关闭扫描表，任何查询将会是扫描失败
+# Turns off table scans.  Any query that would do a table scan fails.
+#notablescan = true
+# 关闭数据文件预分配
+# Disable data file preallocation.
+#noprealloc = true
+# 为新数据库指定.ns文件的大小，单位:MB
+# Specify .ns file size for new databases.
+# nssize =
+
+# Replication Options 复制选项
+# in replicated mongo databases, specify the replica set name here
+#replSet=setname
+# maximum size in megabytes for replication operation log
+#oplogSize=1024
+# path to a key file storing authentication info for connections
+# between replica set members
+#指定存储身份验证信息的密钥文件的路径
+#keyFile=/path/to/keyfile
+```
+
+### 运行
+>首先启动mongoDB服务
+>```
+>mongod --config /etc/mongod.conf
+>```
+>然后终端输入mongo
