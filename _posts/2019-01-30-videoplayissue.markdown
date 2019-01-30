@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 解决苹果设备无法播放视频流文件
+title: Java解决苹果设备无法播放视频流文件
 date: 2019-01-30 17:30:24.000000000 +09:00
 tag: iOS safari 视频
 ---
