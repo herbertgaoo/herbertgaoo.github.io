@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <head>
     <style>
-        #colorGrid {
-            width: 500px;
-            height: 500px;
-        }
+        body{position: fixed;}
         .cols {height: 100px;}
-        .circle { 
+        .circle {
             width: 100px; 
             height: 100px; 
             border-radius: 50%; 
@@ -37,6 +35,8 @@ $(document).ready(function(){
 
 var question;
 function init(num) {
+    $('#colorGrid').css('width',`${num*100}px`);
+
     question = new Array();
     var flag = num;
     var nums = [1,2,3,4,5];
@@ -120,9 +120,11 @@ function check() {
 </head>
 
 <body>
-    <label>棋盘大小：</label>
-    <input id="num" type="number" placeholder="3-5"/>
-    <button id="init">开始</button>
+    <div>
+        <label>棋盘大小：</label>
+        <input id="num" type="number" placeholder="3-5"/>
+        <button id="init">开始</button>
+    </div>
     <div id="colorGrid"></div>
 </body>
 </html>
