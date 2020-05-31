@@ -3,11 +3,8 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
 <head>
     <style>
-        body{position: fixed;}
-        .cols {height: 100px;}
+        body{position: fixed; margin: 0px;}
         .circle {
-            width: 100px; 
-            height: 100px; 
             border-radius: 50%; 
             float: right;
         }
@@ -34,11 +31,12 @@ $(document).ready(function(){
 });
 
 var question;
+var size;
 function init(num) {
-    $('#colorGrid').css('width',`${num*100}px`);
+    $('#colorGrid').css('width',`${window.screen.width}px`);
 
     question = new Array();
-    var flag = num;
+    var flag = size = num;
     var nums = [1,2,3,4,5];
     while ((flag--) > 0) {
         var tmpA = nums.slice(0, num);
@@ -47,7 +45,7 @@ function init(num) {
         });
         question.push(tmpA);
     }
-    refresh();
+    refresh(true);
 }
 
 function move() {
@@ -94,7 +92,12 @@ function move() {
     })
 }
 
-function refresh() {
+function refresh(init) {
+    if(init) {
+        $('#autoW').remove();
+        var tw = window.screen.width - 10;
+        $('head').append(`<style id='autoW'>.circle {width: ${tw/size}px; height: ${tw/size}px;}</style>`)
+    }
     $('#colorGrid').empty();
     var x = 0;
     question.forEach(arrs => {
