@@ -24,7 +24,7 @@ blog_button:
 nav:
     - {title: About, description: About me, url: '/about'}
     - {title: Projects, description: My Projects, url: '/#'}
-    - {title: Another Button, description: A button, url: '/'}
+    - {title: Color, description: A button, url: '/color'}
 
 # Pagination
 gems: [jekyll-paginate]
