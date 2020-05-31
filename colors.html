@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #colorGrid {
+            width: 500px;
+            height: 500px;
+        }
+        .cols {height: 100px;}
+        .circle { 
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%; 
+            float: right;
+        }
+
+        .c1 {background: red; }
+        .c2 {background: gold; }
+        .c3 {background: lightgreen; }
+        .c4 {background: blue; }
+        .c5 {background: plum; }
+    </style>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#init').on('click',function() {
+        // 创建棋盘
+        var num = Number($('#num').val())
+        if(num > 2 && num < 6) {
+            init(num);
+        }
+    })
+
+    //操作监听
+    move();
+});
+
+var question;
+function init(num) {
+    question = new Array();
+    var flag = num;
+    var nums = [1,2,3,4,5];
+    while ((flag--) > 0) {
+        var tmpA = nums.slice(0, num);
+        tmpA.sort(function() {
+            return (0.5-Math.random());
+        });
+        question.push(tmpA);
+    }
+    refresh();
+}
+
+function move() {
+    var startX = 0;
+    var startY = 0;
+    $('#colorGrid').on('mousedown touchstart', function(e) {
+        console.log("down"+e.pageX + ", " + e.pageY);
+        startX = e.pageX || e.originalEvent.changedTouches[0].pageX;
+        startY = e.pageY || e.originalEvent.changedTouches[0].pageY;
+    }).on('mouseup touchend', function(e){
+        console.log("up"+e.pageX + ", " + e.pageY);
+        var target = $(e.target).attr('data-pos').split(',');
+        var offX = (e.pageX || e.originalEvent.changedTouches[0].pageX) - startX;
+        var offY = (e.pageY || e.originalEvent.changedTouches[0].pageY) - startY;
+        if(Math.abs(offX) - Math.abs(offY) > 0) {
+            var tmpRow = question[target[0]];
+            if(offX > 0) {
+                console.log('右')
+               tmpRow.push(tmpRow.shift());
+            } else if(offX < 0) {
+                console.log('左')
+                tmpRow.unshift(tmpRow.pop());
+            } 
+        } else {
+            var tmpCol = [];
+            question.forEach(arrs => {
+                tmpCol.push(arrs[target[1]]);
+            })
+            console.log(tmpCol);
+            if(offY > 0) {
+                console.log('下')
+                tmpCol.unshift(tmpCol.pop());
+            } else if(offY < 0) {
+                console.log('上')
+                tmpCol.push(tmpCol.shift());
+            }
+            var tmpF = 0;
+            question.forEach(arrs => {
+                arrs[target[1]] = tmpCol[tmpF++];
+            })
+        }
+        refresh();
+        check();
+    })
+}
+
+function refresh() {
+    $('#colorGrid').empty();
+    var x = 0;
+    question.forEach(arrs => {
+        var cols = $('<div class="cols"></div>');
+        var y=0;
+        arrs.forEach(cStr => {
+            var cell = `<div class="circle c${cStr}" data-pos="${x},${y++}"></div>`;
+            cols.append(cell);
+        });
+        $('#colorGrid').append(cols);
+        x++;
+    });
+}
+
+function check() {
+    var flag = true;
+    question.forEach(arr => {
+        flag = flag && (Math.max.apply(null, arr) === Math.min.apply(null, arr));
+    })
+    if(flag) {alert('成功')}
+}
+</script>
+</head>
+
+<body>
+    <label>棋盘大小：</label>
+    <input id="num" type="number" placeholder="3-5"/>
+    <button id="init">开始</button>
+    <div id="colorGrid"></div>
+</body>
+</html>
