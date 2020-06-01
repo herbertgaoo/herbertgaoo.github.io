@@ -26,6 +26,16 @@ $(document).ready(function(){
         }
     })
 
+    $('#lightOff').on('click', function() {
+        if($(this).text()=='关灯') {
+            $(this).text('开灯');
+            $('.circle').css('background', 'black');
+        } else {
+            $(this).text('关灯');
+            $('.circle').removeAttr("style","");
+        }
+    })
+
     //操作监听
     move();
 });
@@ -127,6 +137,7 @@ function check() {
         <label>棋盘大小：</label>
         <input id="num" type="number" placeholder="3-5"/>
         <button id="init">开始</button>
+        <button id="lightOff">关灯</button>
     </div>
     <div id="colorGrid"></div>
 </body>
