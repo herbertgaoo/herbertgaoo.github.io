@@ -120,6 +120,10 @@ function refresh(init) {
         $('#colorGrid').append(cols);
         x++;
     });
+
+    if($('#lightOff').text()=='开灯') {
+        $('.circle').css('background', 'black');
+    }
 }
 
 function check() {
