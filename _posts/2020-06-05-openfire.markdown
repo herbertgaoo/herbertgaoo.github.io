@@ -1,0 +1,27 @@
+---
+layout: post
+title: openfire性能优化
+date: 2020-06-05 17:30:24.000000000 +09:00
+tag: openifre
+---
+
+&emsp;&emsp;openfire是基于XMPP协议的开源即时通讯服务器，安装使用也很方便。最近刚接触到openfire，遇到一些问题，通过网上查资料和查看源码初步解决，再次记录一下。主要是记录openfire服务器和集群的性能优化。
+
+### 系统属性设置
+
+``` java
+// -1代表无穷大 100000000即是95M
+ClientSessionInfoCache：     cache.ClientSessionInfoCache.size
+Roster：                     cache.username2roster.size
+user：                       cache.userCache.size
+group：                      cache.group.size
+groupMeta：                  cache.groupMeta.size
+offline message：            cache.offlinemessage.size
+offlinePresence：            cache.offlinePresence.size
+Last Activity Cache：        cache.lastActivity.size
+VCard：                      cache.VCard.size
+```
+
+### 还需要优化的地方
+
+&emsp;&emsp;openfire官方提供的集群插件 `hazelcast`在使用的过程中发现还是有内存泄漏的问题，经常会出现同步集群数据超时的问题，目前是通过修改执行同步任务的超时时间处理，如果需要根治还是得考虑集群之间同步的数据缓存化，或者学习大神直接自己写集群处理的插件。
