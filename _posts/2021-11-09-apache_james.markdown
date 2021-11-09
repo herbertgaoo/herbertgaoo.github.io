@@ -43,7 +43,7 @@ SMTP 发件箱
 - 1、Binary  
 https://james.apache.org/download.cgi
 
-- 2、james-server-app-3.5.0-app.zip
+- 2、james-server-app-3.5.0-app.zip  
 https://archive.apache.org/dist/james/server/3.5.0/
 
 
@@ -77,6 +77,7 @@ https://archive.apache.org/dist/james/server/3.5.0/
 ```
 
 - 出现以下信息启动成功  
+
 ``` sh
 09-Nov-2021 19:58:03.442 INFO [main] org.apache.james.app.spring.JamesAppSpringMain.main:46 - Apache James Server is successfully started in 38766 milliseconds.
 ```
