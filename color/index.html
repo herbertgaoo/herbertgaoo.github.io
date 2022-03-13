@@ -17,12 +17,12 @@
     </style>
 <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-window.onload = function(){
+$(document).ready(function(){
+    
     document.body.addEventListener('touchmove', function (e) {
         e.preventDefault();
     }, {passive: false});
-}
-$(document).ready(function(){
+    
     $('#init').on('click',function() {
         // 创建棋盘
         var num = Number($('#num').val())
