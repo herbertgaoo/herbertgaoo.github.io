@@ -26,8 +26,9 @@ nav:
     - {title: Projects, description: My Projects, url: '/#'}
     - {title: Color, description: A button, url: '/color'}
 
+plugins: [jekyll-paginate]
+
 # Pagination
-gems: [jekyll-paginate]
 paginate: 10
 paginate_path: "page/:num/"
 
