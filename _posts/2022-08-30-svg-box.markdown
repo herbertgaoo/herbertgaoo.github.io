@@ -1,0 +1,44 @@
+---
+layout: post
+title: SVG图片动态修改颜色
+date: 2022-08-30 08:54:24.000000000 +08:00
+tag: ECharts
+---
+
+## 原理
+页面中使用 `<img>` 标签显示svg图片时，可以通过css中 `transform` 和 `filter` 属性配合容器元素的 `overflow:hidden` 来显示不同的颜色，具体逻辑是通过控制图片的偏移和投射阴影来实现，具体看代码。
+
+
+## 代码示例
+``` html
+<template>
+    <div class="svg-box" :style="{'width': `${size}px`,'height': `${size}px`}">
+        <img :src="src" :style="{'transform': `translateX(-${size}px)`, 'filter': `drop-shadow(${activeColor || color} ${size}px 0)`}"/>
+    </div>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Emit, Vue } from "vue-property-decorator"
+@Component({
+    name: "SvgBox"
+})
+export default class SvgBox extends Vue {
+    @Prop({ default: "" }) src!: any
+    @Prop({ default: "#666" }) color?: string
+    @Prop({ default: "" }) activeColor?: string
+    @Prop({ default: 16 }) size?: number
+
+    private mounted () {}
+}
+</script>
+
+<style lang="less" scoped>
+.svg-box {
+    display: inline-flex;
+    overflow: hidden;
+}
+</style>
+
+```
+
+
