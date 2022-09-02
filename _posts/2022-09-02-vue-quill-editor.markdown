@@ -20,6 +20,7 @@ Baidu了好多之后发现都是通过修改`node_modules`中`quill`编译之后
 
 ## 修改步骤
 ---
+
 1. 注册并添加白名单
 
 ``` js
@@ -29,7 +30,9 @@ sizeStyle.whitelist = ['12px', '14px', '16px', '18px', '20px', '24px', '30px', '
 Quill.register(sizeStyle, true)
 
 ```
+
 2. 修改编辑器选项中的`size`属性
+
 ``` js
 modules: {
     toolbar: [
@@ -40,6 +43,7 @@ modules: {
 }
 ```
 3. 添加对应的css到项目中的css文件中
+
 ``` css
 .ql-picker-item[data-value='12px']::before, .ql-picker-label[data-value='12px']::before {
   content: '12px' !important;
