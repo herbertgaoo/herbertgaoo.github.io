@@ -30,7 +30,7 @@ vue transition-group缓动效果的原理添加`moveClass`， `moveClass`的特�
 ``` html
 <template>
     <div>
-        <button @click="sort">revers Array</button>
+        <button @click="sort">reverse Array</button>
         <transition-group type="transition" name="flip-list">
           <div class="sort-item" v-for="m in messages">{{m}}</div>
         </transition-group>
