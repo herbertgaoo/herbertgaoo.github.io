@@ -1,81 +1,63 @@
 ---
 layout: post
-title: 可编辑div插入html
-date: 2023-04-14 08:54:24.000000000 +08:00
+title: Javascript获取浏览器和系统缩放比例
+date: 2024-09-25 08:54:24.000000000 +08:00
 tag: javascript
 ---
 
 ## 背景
-业务中需要在输入框中输入文本和html，所以采用了可编辑DIV。在插入html元素之后需要设置需要设置`range`开始位置为插入元素之后，然后再插入一个`&ZeroWidthSpace;`以保证可以继续在插入html元素之后继续进行输入内容。
+做屏幕适配，除pxtorem的另外一种方案
 
 ## 代码示例
-``` html
-<template>
-    <div>
-      <div class="editable-div" contenteditable="true" placeholder="hahahah" v-html="fillContent" @keyup="getlastRange" @mouseup="getlastRange"></div>
-      <button type="text" @click="insertBlank">插入填空</button>
-    </div>
-</template>
+``` javascript
+// 获取缩放倍数（1*系统缩放倍数*浏览器缩放倍数）
+function getZoom() {
+  let zoom = 1;
+  const screen = window.screen,
+    ua = navigator.userAgent.toLowerCase();
 
-<script lang="ts">
-import { Component, Prop, Emit, Vue } from "vue-property-decorator"
-@Component({
-    name: "EditableDiv"
-})
-export default class EditableDiv extends Vue {
-  public fillContent = ""
-  public lastRange:any = null
-  
-  public getlastRange () {
-    this.lastRange = window.getSelection()?.getRangeAt(0)
+  if (window.devicePixelRatio !== undefined) {
+    zoom = window.devicePixelRatio;
+  } else if (~ua.indexOf('msie')) {
+    if (screen.deviceXDPI && screen.logicalXDPI) {
+      zoom = screen.deviceXDPI / screen.logicalXDPI;
+    }
+  } else if (window.outerWidth !== undefined && window.innerWidth !== undefined) {
+    zoom = window.outerWidth / window.innerWidth;
   }
-  
-  public insertBlank () {
-    let selection = getSelection()
-    selection?.removeAllRanges()
-    selection?.addRange(this.lastRange)
-    let range = selection?.getRangeAt(0)
-
-    let blankBox = document.createElement('div')
-    blankBox.setAttribute("class", "blank-box");
-    blankBox.setAttribute("contenteditable", "true");
-
-    range?.insertNode(blankBox);
-    range?.setStartAfter(blankBox)
-    
-    /*
-     * insert &ZeroWidthSpace; after blankBox
-     */
-    range?.insertNode(document.createTextNode('\u200b'))
-    range?.collapse(false);
-  }
-  
+  return getDecimal(zoom);
 }
-</script>
 
-<style lang="less" scoped>
-.editable-div {
-  background: #ffffff;
-  padding: 10px !important;
-  border: 1px solid #00000000;
-  border-style: dashed!important;
-  
-  &:empty:before{
-    /** add placeholder use attribute */
-    content: attr(placeholder);
-    color:#ddd;
-  }
+const getDecimal = (num) => {
+  return Math.round(num * 100) / 100;
+};
 
-  &:focus:before{
-    content:none;
-  }
-  &:hover {   border: 1px solid #3f94ff; }
-  &:focus{
-    border: 1px solid #3f94ff;
-    outline:none;
+function getAllZoom() {
+  // 总缩放倍数
+  const zoom = getZoom();
+  // 屏幕分辨率
+  const screenResolution = window.screen.width;
+  // 获取浏览器内部宽度
+  const browserWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  // 浏览器缩放倍数
+  // 浏览器外部宽度不受浏览器缩放影响，浏览器内部宽度受影响,所以根据这个可以计算出浏览器缩放倍数（F12调试工具的占位会影响该值）
+  const browserZoom = getDecimal(window.outerWidth / browserWidth);
+  // 系统缩放倍数
+  const systemZoom = getDecimal(zoom / browserZoom);
+  // 系统分辨率
+  const systemResolution = Math.round(screenResolution * systemZoom);
+
+  console.log('系统分辨率', systemResolution, '屏幕分辨率', screenResolution, '浏览器外部宽度', window.outerWidth, '浏览器内部宽度', browserWidth, '总缩放倍数', zoom, '浏览器缩放倍数', browserZoom, '系统缩放倍数', systemZoom);
+
+  return {
+    zoom,
+    browserZoom,
+    systemZoom,
+    systemResolution
   }
 }
-</style>
+
+getAllZoom();
 
 ```
 
